@@ -1,5 +1,7 @@
 # SimpleBox4Planet Local
 
+**第一次安装？请看 [中文本地部署指南（新手版）](中文本地部署指南.md)**：从安装软件到打开网页，包含 Mac、Windows、Studio 双版本运行与常见问题。
+
 A local web interface for the published SimpleBox 4.04 environmental fate model, with 3,993 PFAS records, editable substance/emission/landscape inputs, and a local calculation engine.
 
 ## Features
