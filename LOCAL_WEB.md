@@ -1,6 +1,6 @@
 # SimpleBox4Planet 本地网页
 
-双击 `启动本地网页.command`，浏览器访问 http://127.0.0.1:8765。
+双击 `启动本地网页.command`，浏览器访问 http://127.0.0.1:8766。
 双击 `停止本地网页.command` 停止本启动器开启的后台服务。
 
 本地网页具备稳态、动态、归趋因子、物质比较、敏感性情景表五组功能，以及完整参数编辑、CSV 导入、CSV/Excel/JSON 导出与情景保存/加载。
@@ -23,7 +23,7 @@ uv pip install --python .venv/bin/python -r requirements.txt
 ```
 
 若 LibreOffice 不在 PATH，设置 `SOFFICE=/path/to/soffice`。
-本机也会自动探测已安装的 Codex LibreOffice runtime。可通过 `--port 8766` 更改端口（双击启动器默认固定为 8765）。
+本机也会自动探测已安装的 Codex LibreOffice runtime。可通过 `--port 8767` 更改端口（双击启动器默认固定为 8766）。
 
 ## 计算过程
 

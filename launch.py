@@ -11,13 +11,13 @@ import urllib.request
 import webbrowser
 
 ROOT=Path(__file__).resolve().parent
-URL='http://127.0.0.1:8765'
+URL='http://127.0.0.1:8766'
 RUNTIME=ROOT/'runtime';RUNTIME.mkdir(exist_ok=True)
 PID=RUNTIME/'server.pid'
 def health():
     try:
         with urllib.request.urlopen(URL+'/api/health',timeout=1) as response:
-            return json.load(response).get('app')=='simplebox-local'
+            return json.load(response).get('frontend')=='studio'
     except Exception:return False
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--stop',action='store_true');parser.add_argument('--no-browser',action='store_true');args=parser.parse_args()

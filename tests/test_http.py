@@ -66,5 +66,5 @@ def test_local_only_and_input_validation(url):
     req=urllib.request.Request(url+'/api/catalog',headers={'Origin':'https://example.com'})
     with pytest.raises(urllib.error.HTTPError) as err:urllib.request.urlopen(req)
     assert err.value.code==403
-    for path in ['/','/app.js','/style.css','/guide','/favicon.svg']:
+    for path in ['/','/app.js','/style.css','/studio.css','/studio.js','/guide','/favicon.svg']:
         assert request(url,path)

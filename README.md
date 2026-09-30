@@ -1,6 +1,8 @@
-# SimpleBox4Planet Local
+# SimpleBox Studio
 
 A local web interface for the published SimpleBox 4.04 environmental fate model, with 3,993 PFAS records, editable substance/emission/landscape inputs, and a local calculation engine.
+
+The Studio feature adds a responsive forest-green workspace, section navigation, visual model overview and clearer results. It runs on port **8766**; the original `main` version can continue independently on **8765**. Use separate checkouts when running both. Calculation methods and API workflows are shared.
 
 ## Features
 
@@ -20,14 +22,14 @@ All calculations run locally using LibreOffice, NumPy and SciPy. Microsoft Excel
 Install Python 3.14, [uv](https://docs.astral.sh/uv/) and [LibreOffice](https://www.libreoffice.org/).
 
 ```sh
-git clone --recurse-submodules https://github.com/knightnemo/simplebox4planet-local.git
+git clone --branch codex/feature-studio-ui --recurse-submodules https://github.com/knightnemo/simplebox4planet-local.git
 cd simplebox4planet-local
 uv venv --python 3.14 .venv
 uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python server.py
 ```
 
-Open **http://127.0.0.1:8765**. Use `--port 8766` to select another port.
+Open **http://127.0.0.1:8766**. Use `--port 8767` to select another port.
 If LibreOffice is not found automatically, set `SOFFICE` to its executable path.
 
 On macOS, `启动本地网页.command` starts the app in the background and opens the browser; `停止本地网页.command` stops it. The launcher requires the Python environment above.

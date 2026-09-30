@@ -99,7 +99,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self.local_request():return self.send(403,{'error':'Local requests only'})
         u=urlparse(self.path); path=u.path
-        if path=='/api/health':return self.send(200,dict(status='ok',app='simplebox-local',engine=soffice_path()))
+        if path=='/api/health':return self.send(200,dict(status='ok',app='simplebox-local',frontend='studio',engine=soffice_path()))
         if path=='/api/catalog':return self.send(200,CATALOG)
         if path.startswith('/api/jobs/'):
             id=path.rsplit('/',1)[-1]; job=JOBS.get(id)
@@ -132,7 +132,7 @@ class Handler(BaseHTTPRequestHandler):
             p=CACHE/(id+'.xlsx')
             if not p.exists():return self.send(404,{'error':'Unknown run'})
             return self.send(200,p.read_bytes(),'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','SimpleBox-calculated.xlsx')
-        files={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/guide':'guide.html','/favicon.ico':'favicon.svg','/favicon.svg':'favicon.svg'}
+        files={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/studio.css':'studio.css','/studio.js':'studio.js','/guide':'guide.html','/favicon.ico':'favicon.svg','/favicon.svg':'favicon.svg'}
         if path not in files:return self.send(404,{'error':'Not found'})
         p=ROOT/'static'/files[path]
         return self.send(200,p.read_bytes(),mimetypes.guess_type(p)[0] or 'application/octet-stream')
@@ -161,7 +161,7 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__=='__main__':
     import argparse
-    parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=8765);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=8766);args=parser.parse_args()
     soffice_path()
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
     print(f'SimpleBox local: http://127.0.0.1:{args.port}',flush=True)
