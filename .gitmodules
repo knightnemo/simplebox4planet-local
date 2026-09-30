@@ -1,0 +1,3 @@
+[submodule "SimpleBox4Planet"]
+	path = SimpleBox4Planet
+	url = https://github.com/NovaMechanicsOpenSource/SimpleBox4Planet.git

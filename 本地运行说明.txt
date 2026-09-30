@@ -1,0 +1,46 @@
+SimpleBox4Planet 本地运行说明
+
+新增：本地网页已经实现。双击“启动本地网页.command”，访问 http://127.0.0.1:8765。
+网页提供稳态、动态、归趋因子、物质比较、敏感性分析。详见 LOCAL_WEB.md 或网页“使用指南”。
+以下内容是此前 Excel 直接运行方式的说明；其中动态 R 流程未部署的限制仅指该 Excel 方式。
+
+已在本机 Microsoft Excel 中打开并验证稳态重算。
+双击“启动SimpleBox.command”，或直接打开 local/SimpleBox4Planet.xlsx。
+无需 Node、Docker、Python 服务或联网运行。
+
+文件位置
+SimpleBox4Planet/：原始 Git 仓库，保留上游文件。
+local/SimpleBox4Planet.xlsx：本地工作副本，已由 Excel 重新计算并保存。
+
+使用方法
+1. 打开 input 工作表。
+2. I5 为物质名称，默认 default substance。可从 substances 的 B 列复制完整名称。
+   已验证 Perfluorobutanoic acid (PFBA) 能切换并产生数值输出。
+3. I8 为情景名称，I10 为案例名称。初次使用可保留默认值。
+4. 在 I 列 User input 中填写覆盖值。H 列注明单位，L 列为实际使用值。
+   例如 I80 为区域空气排放，单位 t/yr（吨/年），并非 README 举例的 kg/day。
+5. 使用 Excel“公式 > 立即计算”，再查看 output 页。
+   output!C11 为区域空气质量（kg），C15 为区域湖水质量（kg），C19 为区域淡水质量（kg）。
+6. 建议另存为自己的情景文件，避免覆盖默认工作副本。
+
+验证记录（2026-10-01）
+上游：https://github.com/NovaMechanicsOpenSource/SimpleBox4Planet
+提交：297dfacb633afc8140760b754360b3ff5a7d83c6
+Excel 原生完整重算后，默认 output!C11 = 98144.7070693854 kg。
+input!I80 = 20000 时，output!C11 = 137885.540048298 kg。
+清空 I80 后恢复为 98144.7070693854 kg。
+选择 PFBA 时，output!C11 = 69443.4776163945 kg。
+测试结束已恢复 default substance，并清空 I80 覆盖值。
+重算保存后 input/output 页未发现 Excel 错误值，无外部工作簿链接。
+这些测试验证软件计算通路，不代表对物质参数和科学模型的独立验证。
+
+上游限制
+1. 该仓库实际只有 README、许可证和 SimpleBoxSubOriginal.xlsx。
+   README 提及的 SimpleBox4Planet_PFAS.xlsx 文件名与仓库实际文件名不一致。
+   网页版服务端/前端源码未包含在此仓库，无法据此原样部署网页版。
+2. 原始文件与本地重算副本均存在 engine!C48、E48 的两处 #DIV/0!，
+   以及 formulas 页 121 处 #NAME?。本次未改动这些上游公式。
+   已测试稳态输出有数值且随输入重算，但不能称为全工作簿无错误。
+3. dynamicR!J10:J11 明确说明旧 DynamicCalculation / Rexcel 宏不再支持，
+   动态模拟需另行使用上游指向的 R 脚本。本次未部署或验证该独立 R 流程。
+4. PFBA 仅做计算通路测试，未逐一验证 README 所称的全部 3,993 种 PFAS。
